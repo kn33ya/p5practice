@@ -74,6 +74,12 @@ function setup() {
   background("pink");
 }
 
+function lookAt(ex, ey, mx, my, maxDist) {
+  let angle = atan2(my - ey, mx - ex);
+  let d = min(maxDist, dist(mx, my, ex, ey));
+  ellipse(ex + cos(angle) * d, ey + sin(angle) * d, 80, 80);
+}
+
 function draw() {
   background("pink");
   let cx = width / 2;
@@ -82,6 +88,8 @@ function draw() {
 
   translate(cx, cy);
   scale(s);
+  let mx = (mouseX - cx) / s;
+  let my = (mouseY - cy) / s;
 
   
 
@@ -106,8 +114,8 @@ function draw() {
   arc(-100, 0, 80, 80, 0, PI + QUARTER_PI, CHORD);
   arc(85, 0, 80, 80, 0, PI + QUARTER_PI, CHORD);
   fill("black");
-  ellipse(-80, 0, 80, 80);
-  ellipse(103, 0, 80, 80);
+  lookAt(-100, 0, mx, my, 20);
+  lookAt(85, 0, mx, my, 20);
 
   // mouth
   fill("#FF967E");
